@@ -15,18 +15,11 @@ List<CameraDescription> cameras;
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final cameras = await availableCameras();
-  final firstCamera = cameras.first;
   runApp(new MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-
-  List<String> sources = [
-    'assets/images/Photos/Dog1.jpg',
-    'assets/images/Styles/Kandinsky.jpg',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +34,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       themeMode: ThemeMode.dark,
-
       initialRoute: '/',
       routes: {
-        '/': (context) => Home(photo: sources[0], style: sources[1]),
+        '/': (context) => Home(),
         '/photo': (context) => PhotosPage(),
         '/style': (context) => PaintingsPage(),
         '/review': (context) => ReviewPage(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:path/path.dart';
 import 'review_page.dart';
 import 'home_page.dart';
 
@@ -113,11 +112,12 @@ class _Tile extends StatelessWidget {
     return new Card(
       child: new InkWell(
         onTap: () {
-          // debugPrint('$source');
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => Home()),
-          // );
+          debugPrint('$source');
+          reviewPage.style = source;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
         },
         child: new Column(
           children: <Widget>[

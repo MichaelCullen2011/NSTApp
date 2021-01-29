@@ -112,8 +112,6 @@ class _PhotosPageState extends State<PhotosPage> {
 class _Tile extends StatelessWidget {
   const _Tile(this.source, this.index, this.name);
 
-  static int tappedGestureDetector = 0;
-
   final String name;
   final String source;
   final int index;
@@ -124,10 +122,11 @@ class _Tile extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           debugPrint('$source');
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => Home()),
-          // );
+          reviewPage.photo = source;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
         },
         child: new Column(
           children: <Widget>[

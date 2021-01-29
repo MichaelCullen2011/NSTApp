@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
-import 'photos_page.dart';
-import 'paintings_page.dart';
 
+_ReviewPage reviewPage;
 
 class ReviewPage extends StatefulWidget {
-  final String photo;
-  final String style;
-  ReviewPage({this.photo, this.style});
+  // final String photo;
+  // final String style;
+  // ReviewPage({this.photo, this.style});
 
   @override
-  _ReviewPage createState() => _ReviewPage();
+  _ReviewPage createState() {
+    reviewPage = _ReviewPage();
+    return reviewPage;
+  }
 }
 
 class _ReviewPage extends State<ReviewPage> {
+
+  var photo = 'assets/images/Photos/Dog1.jpg';
+  var style = 'assets/images/Styles/Kandinsky.jpg';
+
+  // List<String> sources = [
+  //   'assets/images/Photos/Dog1.jpg',
+  //   'assets/images/Styles/Kandinsky.jpg',
+  // ];
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    debugPrint(photo);
+    debugPrint(style);
+    return Scaffold(
       appBar: new AppBar(
         title: new Text('Selections'),
       ),
@@ -23,8 +36,8 @@ class _ReviewPage extends State<ReviewPage> {
         child: new Column(
           children: <Widget>[
             new Text("Select a photo and painting to combine"),
-            new Image(image: AssetImage(widget.photo)),
-            new Image(image: AssetImage(widget.style)),
+            new Image(image: AssetImage(photo)),
+            new Image(image: AssetImage(style)),
           ]
         )
       ),
@@ -34,7 +47,7 @@ class _ReviewPage extends State<ReviewPage> {
           backgroundColor: Colors.indigo.shade200,
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      );
+    );
   }
 }
 

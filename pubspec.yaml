@@ -32,6 +32,7 @@ dependencies:
   permission_handler:
   esys_flutter_share:
   persistent_bottom_nav_bar:
+  provider:
 
 
   # The following adds the Cupertino Icons font to your application.
