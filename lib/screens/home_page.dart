@@ -34,56 +34,71 @@ class _HomeState extends State<Home>{
           //100% width and vertical height
           child:Stack(
             children: <Widget>[
-              SingleChildScrollView(
-                child: new Column(
-                  children: <Widget>[
-                    new Image.asset(photo),
-                    new Image.asset(style),
-                  ]
+              Center(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(30.0),
+                  child: new Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        new Card(
+                          child: new Image.asset(photo, height: 300.0, fit: BoxFit.cover),
+                        ),
+                        new Card(
+                          child: new Image.asset(style, height: 300.0, fit: BoxFit.cover),
+                        ),
+                      ]
+                  ),
                 ),
-              ), // main content wrapper
+              ),// main content wrapper
 
               Positioned(
-                  left:100, right:100, bottom:20,
-                  //position to button:20
+
+                  left:40, right:40, bottom:30,
 
                   child:Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      //align buttoms to the right
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween ,
                       children: <Widget>[
+                      Container(
+                          width: 50.0,
+                          height: 50.0,
+                          child: FloatingActionButton(
+                            heroTag: "phototBtn",
+                            elevation: 10.0,
+                            onPressed: (){
+                              // _navigateAndDisplaySelectionPhoto(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => PhotosPage()),
+                              );
+                            },
+                            backgroundColor: Colors.indigo.shade200,
+                            child: Icon(Icons.photo),
+                          )
+                        ),
+
+                      Container(
+                          width: 60.0,
+                          height: 60.0,
+                          child: FloatingActionButton(
+                            heroTag: "confirmBtn",
+                            elevation: 10.0,
+                            onPressed: (){
+                              //action code for button 2
+                            },
+                            backgroundColor: Colors.indigo.shade200,
+                            child: Icon(Icons.upgrade_rounded, size: 30.0),
+                          )
+                        ),
 
                         Container(
-                            margin:EdgeInsets.only(right:20),
-                            child: FloatingActionButton(
-                              heroTag: "phototBtn",
-                              onPressed: (){
-                                // _navigateAndDisplaySelectionPhoto(context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => PhotosPage()),
-                                );
-                              },
-                              backgroundColor: Colors.indigo.shade200,
-                              child: Icon(Icons.photo),
-                            )
-                        ), //button first
-
-                        Container(
-                            margin:EdgeInsets.only(right:20),
-                            child: FloatingActionButton(
-                              heroTag: "confirmBtn",
-                              onPressed: (){
-                                //action code for button 2
-                              },
-                              backgroundColor: Colors.indigo.shade200,
-                              child: Icon(Icons.check),
-                            )
-                        ), // button second
-
-                        Container(
+                            width: 50.0,
+                            height: 50.0,
                             child: FloatingActionButton(
                               heroTag: "paintingsBtn",
+                              elevation: 10.0,
                               onPressed: (){
                                 Navigator.push(
                                   context,
@@ -93,7 +108,7 @@ class _HomeState extends State<Home>{
                               backgroundColor: Colors.indigo.shade200,
                               child: Icon(Icons.brush),
                             )
-                        ), // button third
+                        ),
 
                         // Add more buttons here
                       ],),
