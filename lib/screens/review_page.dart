@@ -1,33 +1,21 @@
 import 'package:flutter/material.dart';
 
-_ReviewPage reviewPage;
-
 class ReviewPage extends StatefulWidget {
-  // final String photo;
-  // final String style;
-  // ReviewPage({this.photo, this.style});
+  final String photo;
+  final String style;
+  ReviewPage({this.photo, this.style});
 
   @override
   _ReviewPage createState() {
-    reviewPage = _ReviewPage();
-    return reviewPage;
+    return _ReviewPage();
   }
 }
 
 class _ReviewPage extends State<ReviewPage> {
-
-  var photo = 'assets/images/Photos/Dog1.jpg';
-  var style = 'assets/images/Styles/Kandinsky.jpg';
-
-  // List<String> sources = [
-  //   'assets/images/Photos/Dog1.jpg',
-  //   'assets/images/Styles/Kandinsky.jpg',
-  // ];
-
   @override
   Widget build(BuildContext context) {
-    debugPrint(photo);
-    debugPrint(style);
+    debugPrint(widget.photo);
+    debugPrint(widget.style);
     return Scaffold(
       appBar: new AppBar(
         title: new Text('Selections'),
@@ -36,9 +24,10 @@ class _ReviewPage extends State<ReviewPage> {
         child: new Column(
           children: <Widget>[
             new Text("Select a photo and painting to combine"),
-            new Image(image: AssetImage(photo)),
-            new Image(image: AssetImage(style)),
+            new Image(image: AssetImage(widget.photo)),
+            new Image(image: AssetImage(widget.style)),
           ]
+
         )
       ),
       floatingActionButton: new FloatingActionButton(
@@ -49,11 +38,4 @@ class _ReviewPage extends State<ReviewPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-}
-
-class Sources {
-  final String photo;
-  final String style;
-
-  Sources(this.photo, this.style);
 }

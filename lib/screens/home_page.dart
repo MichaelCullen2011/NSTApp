@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/screens/schedule.dart';
 import 'package:provider/provider.dart';
 
 import 'photos_page.dart';
 import 'paintings_page.dart';
-import 'review_page.dart';
-import 'schedule.dart';
+import 'sources.dart';
 
 class Home extends StatefulWidget {
+  String photo = 'assets/images/Photos/Dog1.jpg';
+  String style = 'assets/images/Styles/Kandinsky.jpg';
+
+  Home({this.photo, this.style});
+
   @override
   _HomeState createState() {
     return _HomeState();
@@ -15,54 +18,90 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home>{
-  int _currentIndex = 1;
-
-  List<Widget> _children() => [
-    new PhotosPage(),
-    new ReviewPage(),
-    new PaintingsPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final List<Widget> children = _children();
-    return ChangeNotifierProvider(
-      create: (context) => MySchedule(),
-      child: Scaffold(
+    var photo = Provider.of<Sources>(context).photo;
+    var style = Provider.of<Sources>(context).style;
+    return Scaffold(
         appBar: AppBar(
           title: Text('NST'),
           centerTitle: true,
         ),
-        body: children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.indigo.shade200,
-          onTap: onTabTapped,
-          currentIndex: _currentIndex, // this will be set when a new tab is tapped
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.photo),
-              label: "Photos",
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.upgrade),
-              label: "Selections",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.brush),
-              label: "Paintings",
-            )
-          ],
-        ),
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          //making outermost wrapper equal to
+          //100% width and vertical height
+          child:Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: new Column(
+                  children: <Widget>[
+                    new Image.asset(photo),
+                    new Image.asset(style),
+                  ]
+                ),
+              ), // main content wrapper
+
+              Positioned(
+                  left:100, right:100, bottom:20,
+                  //position to button:20
+
+                  child:Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      //align buttoms to the right
+                      children: <Widget>[
+
+                        Container(
+                            margin:EdgeInsets.only(right:20),
+                            child: FloatingActionButton(
+                              heroTag: "phototBtn",
+                              onPressed: (){
+                                // _navigateAndDisplaySelectionPhoto(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => PhotosPage()),
+                                );
+                              },
+                              backgroundColor: Colors.indigo.shade200,
+                              child: Icon(Icons.photo),
+                            )
+                        ), //button first
+
+                        Container(
+                            margin:EdgeInsets.only(right:20),
+                            child: FloatingActionButton(
+                              heroTag: "confirmBtn",
+                              onPressed: (){
+                                //action code for button 2
+                              },
+                              backgroundColor: Colors.indigo.shade200,
+                              child: Icon(Icons.check),
+                            )
+                        ), // button second
+
+                        Container(
+                            child: FloatingActionButton(
+                              heroTag: "paintingsBtn",
+                              onPressed: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => PaintingsPage()),
+                                );
+                              },
+                              backgroundColor: Colors.indigo.shade200,
+                              child: Icon(Icons.brush),
+                            )
+                        ), // button third
+
+                        // Add more buttons here
+                      ],),
+                  )
+              ), // our floating action button wrapper
+            ],
+          ),
       ),
     );
   }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 }
-
-

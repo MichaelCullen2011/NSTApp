@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'review_page.dart';
-import 'home_page.dart';
+import 'sources.dart';
+import 'package:provider/provider.dart';
 
 
 List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
@@ -113,10 +113,10 @@ class _Tile extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           debugPrint('$source');
-          reviewPage.style = source;
-          Navigator.push(
+          Provider.of<Sources>(context, listen: false).changeStyle(source);
+          Navigator.pop(
             context,
-            MaterialPageRoute(builder: (context) => Home()),
+            source,
           );
         },
         child: new Column(

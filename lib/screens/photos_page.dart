@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:camera/camera.dart';
+import 'package:provider/provider.dart';
+import 'sources.dart';
 import 'camera_screen.dart';
-import 'review_page.dart';
-import 'home_page.dart';
 
 List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
   const StaggeredTile.count(2, 2),
@@ -95,6 +95,7 @@ class _PhotosPageState extends State<PhotosPage> {
 
       ),
       floatingActionButton: new FloatingActionButton(
+        heroTag: "cameraBtn",
         onPressed: () {
           Navigator.push(
             context,
@@ -122,10 +123,10 @@ class _Tile extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           debugPrint('$source');
-          reviewPage.photo = source;
-          Navigator.push(
+          Provider.of<Sources>(context, listen: false).changePhoto(source);
+          Navigator.pop(
             context,
-            MaterialPageRoute(builder: (context) => Home()),
+            source,
           );
         },
         child: new Column(
