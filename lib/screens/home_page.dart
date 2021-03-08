@@ -1,16 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'photos_page.dart';
 import 'paintings_page.dart';
 import 'sources.dart';
+import 'requests.dart';
 
 class Home extends StatefulWidget {
-  String photo = 'assets/images/Photos/Dog1.jpg';
-  String style = 'assets/images/Styles/Kandinsky.jpg';
-
-  Home({this.photo, this.style});
-
   @override
   _HomeState createState() {
     return _HomeState();
@@ -22,6 +20,9 @@ class _HomeState extends State<Home>{
   Widget build(BuildContext context) {
     var photo = Provider.of<Sources>(context).photo;
     var style = Provider.of<Sources>(context).style;
+    var photoName = photo.substring(21, photo.length-4);
+    var styleName = style.substring(21, style.length-4);
+
     return Scaffold(
         appBar: AppBar(
           title: Text('NST'),
@@ -86,7 +87,13 @@ class _HomeState extends State<Home>{
                             heroTag: "confirmBtn",
                             elevation: 10.0,
                             onPressed: (){
-                              //action code for button 2
+                              Provider.of<Sources>(context, listen: false).changeImgURL(
+                                'http' + photoName + '-' + styleName + '.jpg'
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => RequestsPage(photoName, styleName)),
+                              );
                             },
                             backgroundColor: Colors.indigo.shade200,
                             child: Icon(Icons.upgrade_rounded, size: 30.0),

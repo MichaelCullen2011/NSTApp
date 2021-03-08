@@ -15,6 +15,7 @@ List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
   const StaggeredTile.count(2, 2),
   const StaggeredTile.count(2, 2),
   const StaggeredTile.count(2, 2),
+  const StaggeredTile.count(2, 2),
 ];
 
 class PaintingsPage extends StatelessWidget {
@@ -46,25 +47,25 @@ class PaintingsPage extends StatelessWidget {
             'Composition VII (1913)',
             'Wassily Kandinsky',),
           new _Tile(
-            'assets/images/Styles/Maris.jpg',
+            'assets/images/Styles/Irises.jpg',
             4,
-            'A Girl with Flowers on the Grass',
-            'Jacob Maris',),
+            'Irises',
+            'Vincent Van Gogh',),
           new _Tile(
-            'assets/images/Styles/Menzi.jpg',
+            'assets/images/Styles/TheGreatWave.jpg',
             5,
-            'A Japanese Town',
-            'Tamara Menzi',),
+            'The Great Wave off Kanagawa',
+            'Hokusai',),
           new _Tile(
             'assets/images/Styles/Picasso.jpg',
             6,
             'femme au béret et à la robe quadrillée',
             'Pablo Picasso',),
           new _Tile(
-            'assets/images/Styles/Pollock.jpg',
+            'assets/images/Styles/TheScream.jpg',
             7,
-            'Abstract 09',
-            'Pollock Tribute',),
+            'The Scream',
+            'Edvard Munch',),
           new _Tile(
             'assets/images/Styles/Portrait.jpg',
             8,
@@ -80,8 +81,14 @@ class PaintingsPage extends StatelessWidget {
             10,
             'The Starry Night',
             'Vincent Van Gogh',),
+          new _Tile(
+            'assets/images/Styles/Pollock.jpg',
+            11,
+            'The Moon-Woman Cuts the Circle',
+            'Jackson Pollock',),
         ],
         staggeredTiles: const <StaggeredTile>[
+          const StaggeredTile.fit(2),
           const StaggeredTile.fit(2),
           const StaggeredTile.fit(2),
           const StaggeredTile.fit(2),
