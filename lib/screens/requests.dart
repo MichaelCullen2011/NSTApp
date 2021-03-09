@@ -21,7 +21,7 @@ class _RequestsPage extends State<RequestsPage> {
   @override
   void initState() {
     super.initState();
-    _futureImage = getImageJSON('http://192.168.0.14:5000/nst', widget.photoName, widget.styleName);
+    _futureImage = getImageJSON('https://nstserver.herokuapp.com/nst', widget.photoName, widget.styleName);
   }
 
   @override
@@ -51,7 +51,16 @@ class _RequestsPage extends State<RequestsPage> {
               return Text("${snapshot.error.toString()}");
             }
           }
-          return CircularProgressIndicator();
+          return Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+              CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo.shade200),
+              ),
+            ]
+            ),
+          );
         },
       ),
     ),

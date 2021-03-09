@@ -16,6 +16,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home>{
+  Future<ImageJSON> _futureImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureImage = getImageJSON('https://nstserver.herokuapp.com/nst', 'Dog1', 'Kandinsky');
+  }
+
   @override
   Widget build(BuildContext context) {
     var photo = Provider.of<Sources>(context).photo;
