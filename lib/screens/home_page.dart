@@ -25,8 +25,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _futureImage = getImageJSON('http://192.168.0.14:5000/nst', 'Dog1', 'Kandinsky');
-    // _futureImage = getImageJSON('https://nstserver.herokuapp.com/nst', 'Dog1', 'Kandinsky');
+    // _futureImage = getImageJSON('http://192.168.0.14:5000/nst', 'Dog1', 'Kandinsky');
+    _futureImage = getImageJSON('https://nstserver.herokuapp.com/nst', 'Dog1', 'Kandinsky');
   }
 
   @override

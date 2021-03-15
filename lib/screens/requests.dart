@@ -94,8 +94,8 @@ class ImageJSON {
 }
 
 Future<ImageJSON> getImageJSON(file, content, style) async {
-  final uri = 'http://192.168.0.14:5000/nst';
-  // final uri = 'https://nstserver.herokuapp.com/nst';
+  // final uri = 'http://192.168.0.14:5000/nst';
+  final uri = 'https://nstserver.herokuapp.com/nst';
   final headers = {'Content-Type': 'application/json'};
 
   File fileFile = new File(file);

@@ -28,11 +28,6 @@ Future<Null> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-
-  // var photo = 'assets/images/Photos/Dog1.jpg';
-  // var style = 'assets/images/Styles/Kandinsky.jpg';
-
   @override
   Widget build(BuildContext context) {
     var photo = Provider.of<Sources>(context).photo;
