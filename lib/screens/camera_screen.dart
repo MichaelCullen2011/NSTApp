@@ -1,8 +1,14 @@
-import 'package:camera/camera.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'preview_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:camera/camera.dart';
+
+import 'home_page.dart';
+import 'sources.dart';
+import 'requests.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -184,28 +190,22 @@ class _CameraScreenState extends State {
     // Take the Picture in a try / catch block. If anything goes wrong,
     // catch the error.
     try {
+      // var file = '${DateTime.now()}.jpg';
+      // final filename = file.replaceAll(' ', '');
+      final filename = 'camera_image.jpg';
       // Attempt to take a picture and log where it's been saved
       final path = join(
-        // In this example, store the picture in the temp directory. Find
-        // the temp directory using the `path_provider` plugin.
-        (await getTemporaryDirectory()).path,
-        '${DateTime.now()}.jpg',
+        (await getApplicationDocumentsDirectory()).path,
+        filename,
       );
-      print(path);
       try {
-        await controller.takePicture();
+        await controller.takePicture(path);
       } catch (e) {
-        await controller.takePicture();
+        print(e);
       }
+      Provider.of<Sources>(context, listen: false).changePhoto(path);
+      Navigator.of(context).popUntil((route) => route.isFirst);
 
-
-      // If the picture was taken, display it on a new screen
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PreviewImageScreen(imagePath: path),
-        ),
-      );
     } catch (e) {
       // If an error occurs, log the error to the console.
       print(e);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'sources.dart';
+
 import 'package:provider/provider.dart';
+
+import 'sources.dart';
 
 
 List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
