@@ -121,7 +121,6 @@ class _Tile extends StatelessWidget {
     return new Card(
       child: new InkWell(
         onTap: () {
-          debugPrint('$source');
           Provider.of<Sources>(context, listen: false).changeStyle(source);
           Navigator.pop(
             context,

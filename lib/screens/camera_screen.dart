@@ -190,22 +190,26 @@ class _CameraScreenState extends State {
     // Take the Picture in a try / catch block. If anything goes wrong,
     // catch the error.
     try {
-      // var file = '${DateTime.now()}.jpg';
+      var file = '${DateTime.now()}.jpg';
+      print(file);
+      file = file.replaceAll(' ', '');
+      file = file.replaceAll(':', '');
+      file = file.replaceAll('-', '');
+      final filename = file.replaceFirst('.', '');
+      print(filename);
       // final filename = file.replaceAll(' ', '');
-      final filename = 'camera_image.jpg';
-      // Attempt to take a picture and log where it's been saved
-      final path = join(
+      var path = join(
         (await getApplicationDocumentsDirectory()).path,
         filename,
       );
+
       try {
         await controller.takePicture(path);
+        Provider.of<Sources>(context, listen: false).changePhoto(path);
+        Navigator.of(context).popUntil((route) => route.isFirst);
       } catch (e) {
         print(e);
       }
-      Provider.of<Sources>(context, listen: false).changePhoto(path);
-      Navigator.of(context).popUntil((route) => route.isFirst);
-
     } catch (e) {
       // If an error occurs, log the error to the console.
       print(e);

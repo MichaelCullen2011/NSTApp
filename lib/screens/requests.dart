@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,14 +41,17 @@ class _RequestsPage extends State<RequestsPage> {
         future: _futureImage,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            print("FINSHED CONNECTION");
             if (snapshot.hasData) {
-              print("HAS DATA");
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
                     flex: 2,
+                    // child: Transform(
+                    //     alignment: Alignment.center,
+                    //     transform: Matrix4.rotationY(math.pi),
+                    //     child: Image.network(snapshot.data.url.toString(), alignment: Alignment.center)
+                    // )
                     child: Image.network(snapshot.data.url.toString()),
                   ),
                 ],
@@ -107,7 +111,6 @@ Future<ImageJSON> getImageJSON(file, content, style) async {
     'style': style,
   };
   if (content != 'camera_image') {
-    print("DOG1 IMAGE TO BE POSTED");
     var image = http.MultipartFile.fromBytes(
       'file',
       (await rootBundle.load(file)).buffer.asUint8List(),
@@ -116,7 +119,6 @@ Future<ImageJSON> getImageJSON(file, content, style) async {
     request.files.add(image);
   }
   else {
-    print("CAMERA IMAGE TO BE POSTED");
     var image = await http.MultipartFile.fromPath(
         'file',
         file,
