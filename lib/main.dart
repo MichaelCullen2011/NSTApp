@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var photo = Provider.of<Sources>(context).photo;
     var style = Provider.of<Sources>(context).style;
+    var lite = Provider.of<Sources>(context).nstLite;
 
     File photoFile = new File(photo);
     File styleFile = new File(style);
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Home(),
         '/photo': (context) => PhotosPage(),
         '/style': (context) => PaintingsPage(),
-        '/request': (context) => RequestsPage(photo, photoName, styleName),
+        '/request': (context) => RequestsPage(photo, photoName, styleName, lite),
       },
     );
   }

@@ -12,8 +12,9 @@ class RequestsPage extends StatefulWidget {
   final String photo;
   final String photoName;
   final String styleName;
+  final String lite;
 
-  RequestsPage(this.photo, this.photoName, this.styleName);
+  RequestsPage(this.photo, this.photoName, this.styleName, this.lite);
 
   @override
   _RequestsPage createState() => _RequestsPage();
@@ -25,7 +26,7 @@ class _RequestsPage extends State<RequestsPage> {
   @override
   void initState() {
     super.initState();
-    _futureImage = getImageJSON(widget.photo, widget.photoName, widget.styleName);
+    _futureImage = getImageJSON(widget.photo, widget.photoName, widget.styleName, widget.lite);
   }
 
   @override
@@ -64,9 +65,9 @@ class _RequestsPage extends State<RequestsPage> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-              CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo.shade200),
-              ),
+                CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo.shade200),
+                ),
             ]
             ),
           );
@@ -97,8 +98,8 @@ class ImageJSON {
   };
 }
 
-Future<ImageJSON> getImageJSON(file, content, style) async {
-  // final uri = 'http://192.168.0.14:5000/nst';
+Future<ImageJSON> getImageJSON(file, content, style, lite) async {
+  // final uri = 'http://192.168.1.25:5000/nst';
   final uri = 'https://nstserver.herokuapp.com/nst';
   final headers = {'Content-Type': 'application/json'};
 
@@ -109,16 +110,17 @@ Future<ImageJSON> getImageJSON(file, content, style) async {
   Map data = {
     'content': content,
     'style': style,
+    'lite': lite,
   };
-  if (content != 'camera_image') {
+
+  try {
     var image = http.MultipartFile.fromBytes(
       'file',
       (await rootBundle.load(file)).buffer.asUint8List(),
       filename: fileName,
     );
     request.files.add(image);
-  }
-  else {
+  } catch (e) {
     var image = await http.MultipartFile.fromPath(
         'file',
         file,

@@ -21,12 +21,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Future<ImageJSON> _futureImage;
   Future<Widget> _futureWidget;
+  bool isSwitched = true;
 
   @override
   void initState() {
     super.initState();
-    // _futureImage = getImageJSON('http://192.168.0.14:5000/nst', 'Dog1', 'Kandinsky');
-    _futureImage = getImageJSON('https://nstserver.herokuapp.com/nst', 'Dog1', 'Kandinsky');
+    // _futureImage = getImageJSON('http://192.168.1.25:5000/nst', 'Dog1', 'Kandinsky', 'false');
+    _futureImage = getImageJSON('https://nstserver.herokuapp.com/nst', 'Dog1', 'Kandinsky', 'false');
   }
 
   @override
@@ -40,6 +41,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     var photo = Provider.of<Sources>(context).photo;
     var style = Provider.of<Sources>(context).style;
+    var lite = Provider.of<Sources>(context).nstLite;
 
     File photoFile = new File(photo);
     File styleFile = new File(style);
@@ -68,6 +70,18 @@ class _HomeState extends State<Home> {
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: <Widget>[
+                    Center(
+                      child: Switch(
+                        value: isSwitched,
+                        onChanged: (value) {
+                          setState(() {
+                            isSwitched = value;
+                            Provider.of<Sources>(context, listen: false)
+                                .changeNstLite(value);
+                          });
+                        }
+                      )
+                    ),
                     Center(
                       child: SingleChildScrollView(
                         padding: EdgeInsets.all(30.0),
@@ -126,7 +140,7 @@ class _HomeState extends State<Home> {
                                         context,
                                         MaterialPageRoute(builder: (context) =>
                                             RequestsPage(
-                                                photo, photoName, styleName)),
+                                                photo, photoName, styleName, lite)),
                                       );
                                     },
                                     backgroundColor: Colors.indigo.shade200,

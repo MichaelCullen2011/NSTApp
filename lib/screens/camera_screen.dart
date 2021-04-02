@@ -49,7 +49,7 @@ class _CameraScreenState extends State {
       await controller.dispose();
     }
 
-    controller = CameraController(cameraDescription, ResolutionPreset.medium);
+    controller = CameraController(cameraDescription, ResolutionPreset.max);
 
     // If the controller is updated then update the UI.
     controller.addListener(() {
