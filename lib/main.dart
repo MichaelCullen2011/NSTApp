@@ -10,6 +10,7 @@ import 'screens/sources.dart';
 import 'screens/photos_page.dart';
 import 'screens/paintings_page.dart';
 import 'screens/requests.dart';
+import 'screens/splash_screen.dart';
 
 enum Themes {
   DARK, LIGHT, SYSTEM
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
     var styleName = styleFileName.substring(0, styleFileName.length - 4);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'NST Demo',
       theme: new ThemeData(
         brightness: Brightness.light,
@@ -53,8 +55,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       themeMode: ThemeMode.dark,
-      initialRoute: '/home',
+      initialRoute: '/splash',
       routes: {
+        '/splash': (context) => SplashScreen(),
         '/home': (context) => Home(),
         '/photo': (context) => PhotosPage(),
         '/style': (context) => PaintingsPage(),
