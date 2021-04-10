@@ -4,7 +4,8 @@
 
 This is an app built using Android Studio and Flutter
 
-![alt text](https://raw.githubusercontent.com/MichaelCullen2011/NSTApp/master/app.png)
+
+![alt text](https://github.com/MichaelCullen2011/NSTApp/blob/master/app.png?raw=true)
 
 ## Getting Started
 
